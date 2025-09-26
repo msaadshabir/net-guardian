@@ -1,12 +1,13 @@
 # net-guardian
 
-An automated network health and security auditor built with Python. Scans your local network, identifies devices, and flags potential risks — all from the terminal.
+An automated network health and security auditor built with Python. Scans your local network, identifies devices, checks for open ports, and flags potential risks — all from the terminal.
 
 ## Features
 
 - Auto-detects your home network (Wi-Fi/Ethernet)
 - Discovers live devices using ARP scanning
-- Flags IoT devices (common security risk)
+- Scans open ports on discovered devices (top 100 ports)
+- Flags IoT devices and insecure services (common security risks)
 - Beautiful terminal dashboard with Rich
 
 ## Built With
@@ -15,7 +16,7 @@ An automated network health and security auditor built with Python. Scans your l
 - Scapy (packet crafting)
 - netifaces (network interface detection)
 - Rich (terminal UI)
-- Nmap (for future port scanning)
+- Nmap (port scanning)
 
 ## Setup (macOS)
 

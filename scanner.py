@@ -2,6 +2,25 @@ import netifaces
 from scapy.all import ARP, Ether, srp
 import socket
 
+import nmap
+
+def check_open_ports(ip):
+    """
+    Perform a FAST scan of common ports on a device.
+    Returns a list of open port numbers (e.g., [22, 80, 443]).
+    """
+    try:
+        nm = nmap.PortScanner()
+        # -F = fast scan (top 100 ports), --open = show only open ports
+        nm.scan(ip, arguments='-F --open')
+        if ip in nm.all_hosts():
+            return sorted([int(port) for port in nm[ip].all_tcp() if nm[ip]['tcp'][port]['state'] == 'open'])
+        else:
+            return []
+    except Exception as e:
+        print(f"   ⚠️  Port scan failed for {ip}: {e}")
+        return []
+
 def get_local_network():
     """Auto-detect home network (192.168.x.0/24, 10.x.x.0/24, etc.)"""
     for iface in netifaces.interfaces():
@@ -20,25 +39,31 @@ def get_local_network():
     raise RuntimeError("No valid private network found. Are you connected to Wi-Fi/Ethernet?")
 
 def scan_network():
-    """Discover live devices on the local network using ARP"""
+    """Discover live devices and scan their open ports"""
     network = get_local_network()
     print(f"🔍 Scanning {network}...")
 
     arp = ARP(pdst=network)
     ether = Ether(dst="ff:ff:ff:ff:ff:ff")
     packet = ether/arp
-
     result = srp(packet, timeout=3, verbose=0)[0]
 
     devices = []
     for sent, received in result:
+        ip = received.psrc
+        print(f"   Scanning ports on {ip}...")  # Optional: show progress
+        
         try:
-            hostname = socket.gethostbyaddr(received.psrc)[0]
+            hostname = socket.gethostbyaddr(ip)[0]
         except (socket.herror, UnicodeDecodeError):
             hostname = "Unknown"
+
+        open_ports = check_open_ports(ip)  # ← NEW: scan ports
+
         devices.append({
-            'ip': received.psrc,
+            'ip': ip,
             'mac': received.hwsrc.upper(),
-            'hostname': hostname
+            'hostname': hostname,
+            'open_ports': open_ports  # ← NEW field
         })
     return devices
