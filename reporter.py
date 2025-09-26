@@ -47,6 +47,34 @@ def generate_report(devices):
     console.print(table)
     console.print(f"\n[bold]✅ Total Devices Found: {len(devices)}[/bold]")
     
+    # Scan Summary
+    console.print("\n[bold]📊 Scan Summary:[/bold]")
+    
+    # Count devices by risk
+    low_count = 0
+    medium_count = 0
+    high_count = 0
+    total_ports = 0
+    
+    for device in devices:
+        mac_prefix = device['mac'].replace(':', '')[:6]
+        is_iot = mac_prefix in IOT_OUIS
+        has_risky_port = any(port in RISKY_PORTS for port in device['open_ports'])
+        
+        if has_risky_port:
+            high_count += 1
+        elif is_iot:
+            medium_count += 1
+        else:
+            low_count += 1
+        
+        total_ports += len(device['open_ports'])
+    
+    console.print(f"   Low Risk Devices: {low_count}")
+    console.print(f"   Medium Risk Devices: {medium_count}")
+    console.print(f"   High Risk Devices: {high_count}")
+    console.print(f"   Total Open Ports Detected: {total_ports}")
+    
     # Add risk legend
     console.print("\n[bold]Risk Legend:[/bold]")
     console.print("✅ Low: Standard device, no risky ports")
