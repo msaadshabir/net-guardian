@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-NetGuardian: Automated Network Health & Security Auditor
+net-guardian: Automated Network Health & Security Auditor
 Run with: sudo python3 main.py
 """
 
