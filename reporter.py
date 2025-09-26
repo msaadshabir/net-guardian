@@ -3,7 +3,7 @@ from rich.table import Table
 
 def generate_report(devices):
     console = Console()
-    console.print("[bold green]🛡️  NetGuardian Network Audit Report[/bold green]\n")
+    console.print("[bold green]🛡️  net-guardian Network Audit Report[/bold green]\n")
 
     if not devices:
         console.print("[red]No devices found. Check your network connection.[/red]")
