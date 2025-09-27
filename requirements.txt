@@ -2,3 +2,7 @@ scapy
 netifaces
 python-nmap
 rich
+mac-vendor-lookup
+pandas
+scikit-learn
+# configparser (built-in Python 3.7+)

@@ -1,0 +1,46 @@
+# Virtual environment
+.venv/
+venv/
+env/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.so
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Network scan data (contains IP addresses, MAC addresses, hostnames)
+history/
+*.json
+
+# ML models (trained anomaly detection models)
+*.pkl
+anomaly_model.pkl
+
+# Logs
+*.log
+
+# Temporary files
+*.tmp
+*.temp
+
+# Configuration
+config.ini
+
+# Keep example config
+!config.example.ini
+
+# Scan results export
+scan_results.json
