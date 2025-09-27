@@ -13,7 +13,7 @@ An automated network health and security auditor built with Python. Scans your l
 - Configurable risk assessment rules
 - Detects network anomalies over time
 - JSON export for scan results
-- Beautiful terminal dashboard with Rich
+- Terminal dashboard with Rich
 
 ## Built With
 
