@@ -59,9 +59,9 @@ if __name__ == "__main__":
             # Later runs: detect anomalies
             anomalies = detector.find_anomalies(devices)
             if anomalies:
-                print(f"\n🚨 ANOMALY ALERT! Check these devices: {', '.join(anomalies)}")
+                print(f"\nANOMALY ALERT! Check these devices: {', '.join(anomalies)}")
             else:
-                print("\n✅ No anomalies detected.")
+                print("\nNo anomalies detected.")
         
         generate_report(devices, config)
         
@@ -82,9 +82,9 @@ if __name__ == "__main__":
             
             with open('scan_results.json', 'w') as f:
                 json.dump(export_data, f, indent=2, default=str)
-            print("📄 Results exported to scan_results.json")
+            print("Results exported to scan_results.json")
     except PermissionError:
-        print("❌ Permission denied. Run with 'sudo':")
+        print("Permission denied. Run with 'sudo':")
         print("   sudo python3 main.py")
     except Exception as e:
-        print(f"❌ Error: {e}")
+        print(f"Error: {e}")

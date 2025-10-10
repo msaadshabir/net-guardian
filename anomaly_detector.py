@@ -20,18 +20,18 @@ class NetworkAnomalyDetector:
                 with open(self.model_file, 'rb') as f:
                     self.model = pickle.load(f)
                 self.is_trained = True
-                print("✅ Loaded existing anomaly detection model")
+                print("Loaded existing anomaly detection model")
             except Exception as e:
-                print(f"⚠️  Could not load model: {e}")
+                print(f"Could not load model: {e}")
 
     def _save_model(self):
         """Save trained model to disk"""
         try:
             with open(self.model_file, 'wb') as f:
                 pickle.dump(self.model, f)
-            print("💾 Saved anomaly detection model")
+            print("Saved anomaly detection model")
         except Exception as e:
-            print(f"⚠️  Could not save model: {e}")
+            print(f"Could not save model: {e}")
 
     def _extract_features(self, devices):
         """Convert devices to numbers ML can understand"""
@@ -50,7 +50,7 @@ class NetworkAnomalyDetector:
         self.model.fit(X)
         self.is_trained = True
         self._save_model()
-        print("✅ Trained on current network state (this is now 'normal')")
+        print("Trained on current network state (this is now 'normal')")
 
     def find_anomalies(self, devices):
         """Return IPs that look suspicious"""

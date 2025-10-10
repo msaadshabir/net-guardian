@@ -3,7 +3,7 @@ from rich.table import Table
 
 def generate_report(devices, config=None):
     console = Console()
-    console.print("[bold green]🛡️  net-guardian Network Audit Report[/bold green]\n")
+    console.print("[bold green]NetGuardian Network Audit Report[/bold green]\n")
 
     if not devices:
         console.print("[red]No devices found. Check your network connection.[/red]")
@@ -44,11 +44,11 @@ def generate_report(devices, config=None):
         mac_prefix = device['mac'].replace(':', '')[:6]
         is_iot = mac_prefix in IOT_OUIS
         
-        risk = "[green]✅ Low[/green]"
+        risk = "[green]Low[/green]"
         if is_iot:
-            risk = "[yellow]⚠️  Medium (IoT)[/yellow]"
+            risk = "[yellow]Medium (IoT)[/yellow]"
         if any(port in RISKY_PORTS for port in device['open_ports']):
-            risk = "[red]🚨 High (Risky Service!)[/red]"
+            risk = "[red]High (Risky Service!)[/red]"
 
         vendor = device.get('vendor', 'Unknown')
         category = device.get('category', 'Unknown')
@@ -57,10 +57,10 @@ def generate_report(devices, config=None):
         table.add_row(device['ip'], device['mac'], device['hostname'], vendor, os_info, category, services_str, risk)
 
     console.print(table)
-    console.print(f"\n[bold]✅ Total Devices Found: {len(devices)}[/bold]")
+    console.print(f"\n[bold]Total Devices Found: {len(devices)}[/bold]")
     
     # Scan Summary
-    console.print("\n[bold]📊 Scan Summary:[/bold]")
+    console.print("\n[bold]Scan Summary:[/bold]")
     
     # Count devices by risk
     low_count = 0
@@ -99,6 +99,6 @@ def generate_report(devices, config=None):
     
     # Add risk legend
     console.print("\n[bold]Risk Legend:[/bold]")
-    console.print("✅ Low: Standard device, no risky ports")
-    console.print("⚠️  Medium: IoT device (often unpatched)")
-    console.print("🚨 High: Exposed insecure service (e.g., Telnet, SMB)")
+    console.print("Low: Standard device, no risky ports")
+    console.print("Medium: IoT device (often unpatched)")
+    console.print("High: Exposed insecure service (e.g., Telnet, SMB)")

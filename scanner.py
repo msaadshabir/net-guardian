@@ -85,7 +85,7 @@ def scan_network(fast_mode=False, skip_os=False, skip_vendor=False):
     network = get_local_network()
     scan_type = "FAST" if fast_mode else "DETAILED"
     os_status = " (OS detection disabled)" if skip_os else ""
-    print(f"🔍 Scanning {network} in {scan_type} mode{os_status}...")
+    print(f"Scanning {network} in {scan_type} mode{os_status}...")
     
     arp = ARP(pdst=network)
     ether = Ether(dst="ff:ff:ff:ff:ff:ff")
@@ -94,7 +94,7 @@ def scan_network(fast_mode=False, skip_os=False, skip_vendor=False):
 
     devices = []
     total_devices = len(result)
-    print(f"📡 Found {total_devices} devices, scanning ports...")
+    print(f"Found {total_devices} devices, scanning ports...")
     
     for i, (sent, received) in enumerate(result, 1):
         ip = received.psrc
