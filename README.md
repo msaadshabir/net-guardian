@@ -1,5 +1,10 @@
 # NetGuardian
 
+![Python](https://img.shields.io/badge/python-3.7+-blue.svg)
+![License](https://img.shields.io/badge/license-MIT-green.svg)
+![Platform](https://img.shields.io/badge/platform-macOS%20%7C%20Linux-lightgrey.svg)
+![Nmap](https://img.shields.io/badge/requires-nmap-red.svg)
+
 An automated network health and security auditor built with Python. Scans your local network, identifies devices, checks for open ports, and flags potential security risks from the terminal.
 
 ## Quick Start
